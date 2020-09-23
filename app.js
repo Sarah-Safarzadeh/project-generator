@@ -16,15 +16,33 @@
 
 // printProfileData(profileDataArgs);
 
-const fs = require('fs');
-const generatePage = require('./src/page-template');
+// second round of comments out 
 
-const profileDataArgs = process.argv.slice(2);
+// const fs = require('fs');
+// const generatePage = require('./src/page-template');
 
-const [name, github] = profileDataArgs;
+// const profileDataArgs = process.argv.slice(2);
 
-fs.writeFile('index.html', generatePage(name, github), err => {
-  if (err) throw new Error(err);
+// const [name, github] = profileDataArgs;
 
-  console.log('Portfolio complete! Check out index.html to see the output!');
-});
+// added this line in from module but didnt see it bfore
+// const pageHTML = generatePage(portfolioData);
+// end strange line from module and should remve if problems occur?
+
+// fs.writeFile('index.html', generatePage(name, github), err => {
+//   if (err) throw new Error(err);
+
+//   console.log('Portfolio complete! Check out index.html to see the output!');
+// });
+
+const inquirer = require('inquirer');
+
+inquirer
+  .prompt([
+    {
+    type: 'input',
+    name: 'name',
+    message: 'What is your name?'
+  }
+  ])
+  .then(answers => console.log(answers));
