@@ -57,7 +57,8 @@ return inquirer.prompt([
   ]);
 };
 
-  const promptProject = () => {
+  const promptProject = portfolioData => {
+    portfolioData.projects = [];
     return inquirer.prompt([
       {
       type: 'input',
