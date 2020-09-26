@@ -18,7 +18,7 @@
 
 // second round of comments out 
 
-// const fs = require('fs');
+const fs = require('fs');
 // const generatePage = require('./src/page-template');
 
 // const profileDataArgs = process.argv.slice(2);
