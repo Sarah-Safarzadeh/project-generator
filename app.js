@@ -1,35 +1,23 @@
-// CAN DELETE CODE - COMMENTED OUT AS REFERENCE:
+const { writeFile, copyFile } = require('./utils/generate-site.js');
 
-// const profileDataArgs = process.argv.slice(2, process.argv.length);
-// console.log(profileDataArgs);
+const pageHTML = generatePage(portfolioData);
 
-// // Notice the lack of parentheses around the `profileDataArr` parameter?
-// const printProfileData = profileDataArr => {
-//     for (let i = 0; i < profileDataArr.length; i += 1) {
-//       console.log(profileDataArr[i]);
-//     }
+fs.writeFile('./dist/index.html', pageHTML, err => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log('Page created! Check out index.html in this directory to see it!');
 
-//     console.log('================');
-
-//     profileDataArr.forEach(profileItem => console.log(profileItem));
-//   };
-
-// printProfileData(profileDataArgs);
-
-// second round of comments out 
-
-const fs = require('fs');
-// const generatePage = require('./src/page-template');
-
-// const profileDataArgs = process.argv.slice(2);
-
-// const [name, github] = profileDataArgs;
-
-// added this line in from module but didnt see it bfore
-// const pageHTML = generatePage(portfolioData);
-// end strange line from module and should remve if problems occur?
-
-// fs.writeFile('index.html', generatePage(name, github), err => {
+  fs.copyFile('./src/style.css', './dist/style.css', err => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log('Style sheet copied successfully!');
+  });
+});
+//  generatePage(name, github), err => {
 //   if (err) throw new Error(err);
 
 //   console.log('Portfolio complete! Check out index.html to see the output!');
@@ -157,5 +145,18 @@ const promptProject = portfolioData => {
 promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    console.log(portfolioData);
+    return generatePage(portfolioData);
+  })
+  .then(pageHTML => {
+    return writeFile(pageHTML);
+  })
+  .then(writeFileResponse => {
+    console.log(writeFileResponse);
+    return copyFile();
+  })
+  .then(copyFileResponse => {
+    console.log(copyFileResponse);
+  })
+  .catch(err => {
+    console.log(err);
   });
